@@ -13,9 +13,18 @@
 			type="text"
 			style="width: 10%; -moz-border-radius: 3px; -webkit-border-radius: 3px; margin-right: 70px;"
 			class="requestTitle tableOverflow ng-pristine ng-valid ng-empty ng-touched"
-			ng-model="user.noOfCities">
+			ng-model="user.noOfCities"> 
 		</label>
 	</div>
+	<div class="form-group col-md-6"
+		style="height: 40px; padding-top: 5px;"><label
+			style="width: 100%; font-size: 1em; height: 100%">Please enter the Origin City number
+			<span style="color: red; margin-right: 20px;">*</span><input
+			type="text"
+			style="width: 10%; -moz-border-radius: 3px; -webkit-border-radius: 3px; margin-right: 70px;"
+			class="requestTitle tableOverflow ng-pristine ng-valid ng-empty ng-touched"
+			ng-model="user.originCity">
+		</label></div>
 	<div class="col-md-12" style="text-align: center"> <a ng-click="createMatrix()"><button class="btn btn-primary"
 				style="background: #42AFE3;!important; margin-top: 0em; margin-bottom: 7px;">Click to enter Weightage</button></a></div>
 	<div class="form-group col-md-12" style="width: 940px;" ng-hide="captureInput">
@@ -78,15 +87,20 @@
 									align="center">City Count</td>
 								<td class="requestTitle"
 									style="background: #42AFE3; color: white; border: none; width: 9em; text-align: center"
+									align="center">Tour Path and Cost</td>
+								<td class="requestTitle"
+									style="background: #42AFE3; color: white; border: none; width: 9em; text-align: center"
 									align="center">Date of Request</td>
 							</tr>
-							<tr style="padding-top: 1px;" ng-repeat="requests in requestMatrixList">
+							<tr style="padding-top: 1px;" ng-repeat="requests in user">
 								<td class="requestTitle"
 									style="text-align: center; width: 60px;"><a
 									data-ng-click="showRequestData(requests)"
 									href=""> {{requests.requestMatrixId}} </a></td>
 								<td class="requestTitle"
 									style="text-align: center; width: 60px;">{{requests.noOfCities}}</td>
+									<td class="requestTitle"
+									style="text-align: center; width: 60px;">{{requests.shortestPath}}</td>
 								<td class="requestTitle" style="width: 60px;">{{requests.requestSubmissionDate}}</td>
 							</tr>
 						</table>

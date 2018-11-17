@@ -1,7 +1,7 @@
 package com.hpse.assessment.server.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Array;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,19 +15,17 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
 @Table(name = "REQUEST_DETAILS")
 public class Requests implements Serializable {
 	
-	public List<MatrixInput> getMatrixInput() {
+/*	public List<MatrixInput> getMatrixInput() {
 		return matrixInput;
 	}
 
 	public void setMatrixInput(List<MatrixInput> matrixInput) {
 		this.matrixInput = matrixInput;
-	}
+	}*/
 
 	@Id
 	@GenericGenerator(name="SequenceFetcher", strategy="com.hpse.assessment.server.model.SequenceFetcher")
@@ -36,29 +34,38 @@ public class Requests implements Serializable {
 	private String 	requestDetailsId;
 
 	@Column(name = "REQUESTDETAILSDATE")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy")
-	private Date requestSubmissionDate;
+	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy")
+	private String requestSubmissionDate;
 	
 	@Column(name = "NUMBEROFCITIES")
-	private String  noOfCities;
+	private Long  noOfCities;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="MATRIXDETAILSID", referencedColumnName="REQUESTDETAILSID")
-	private List<MatrixInput> matrixInput;
+	@Column(name = "ORIGINCITY")
+	private Long  originCity;
 	
-	public Date getRequestSubmissionDate() {
+	@Column(name = "MATRIX")
+	private double[][] matrix;
+	
+	@Column(name = "SHORTESTPATH")
+	private String shortestPath;
+/*	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="REQUESTDETAILSID", referencedColumnName="REQUESTDETAILSID")
+	@Column(name = "MatrixInput")
+	private List<MatrixInput> matrixInput;*/
+	
+	public String getRequestSubmissionDate() {
 		return requestSubmissionDate;
 	}
 
-	public void setRequestSubmissionDate(Date requestSubmissionDate) {
+	public void setRequestSubmissionDate(String requestSubmissionDate) {
 		this.requestSubmissionDate = requestSubmissionDate;
 	}
 
-	public String getNoOfCities() {
+	public Long getNoOfCities() {
 		return noOfCities;
 	}
 
-	public void setNoOfCities(String noOfCities) {
+	public void setNoOfCities(Long noOfCities) {
 		this.noOfCities = noOfCities;
 	}
 
@@ -70,5 +77,28 @@ public class Requests implements Serializable {
 		this.requestDetailsId = requestDetailsId;
 	}
 
+	public Long getOriginCity() {
+		return originCity;
+	}
 
+	public void setOriginCity(Long originCity) {
+		this.originCity = originCity;
+	}
+
+	public double[][] getMatrix() {
+		return matrix;
+	}
+
+	public void setMatrix(double[][] matrix) {
+		this.matrix = matrix;
+	}
+
+	public String getShortestPath() {
+		return shortestPath;
+	}
+
+	public void setShortestPath(String shortestPath) {
+		this.shortestPath = shortestPath;
+	}
+	
 }

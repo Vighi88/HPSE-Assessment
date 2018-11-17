@@ -280,7 +280,7 @@
 									.then(
 											function(response) {
 												console.log(response.data);
-												$scope.requestMatrixList = response.data;
+												$scope.user = response.data;
 												}, function(response) {
 												console.log("throw error");
 											});
@@ -294,7 +294,7 @@
 								$http.post('/HPSE/request', $scope.user).then(
 										function(response) {
 											console.log(response.data);
-											alert("Your Request Number is: "+response.data.requestDetailsId)
+											alert("Your Request Number is: "+response.data.requestDetailsId+" and Your shortest Travel Path and cost is: "+response.data.shortestPath)
 											/* Data.setSuccessCode(response.data.commandName); */
 											$route.reload();
 										}, function(response) {
