@@ -276,7 +276,7 @@
 							}
 						$scope.populateRequestPage = function() {
 							$scope.captureInput = true;
-							$http.get('/hpse/allrequests')
+							$http.get('/HPSE/allrequests')
 									.then(
 											function(response) {
 												console.log(response.data);
@@ -288,11 +288,10 @@
 						$scope.findShortestPath = function() {
 							console.log("---------------------------------->");
 							console.log($scope.user);
-							$scope.user.requestDetailsDate=(moment($scope.model).format('YYYY-MM-DD'));
-							console.log("date is----->"+$scope.user.requestDetailsDate);
-							console.log("ConditionList------------->"+$scope.user.conditionList.length);
-								console.log("$scope.user"+$scope.user);
-								$http.post('/ccps-wifa/request', $scope.user).then(
+							$scope.user.requestSubmissionDate=(moment($scope.model).format('YYYY-MM-DD'));
+							console.log("date is----->"+$scope.user.requestSubmissionDate);
+							console.log("$scope.user"+$scope.user);
+								$http.post('/HPSE/request', $scope.user).then(
 										function(response) {
 											console.log(response.data);
 											alert("Your Request Number is: "+response.data.requestDetailsId)
