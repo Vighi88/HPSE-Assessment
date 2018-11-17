@@ -1,0 +1,96 @@
+<div ng-controller="CCPSResponseController"
+	ng-init="populateCCPSResponse()"
+	style="font-size: 1.1em; font-family: agency;">
+	<div class="form-group col-md-10">
+		<h4 align="left"
+			style="letter-spacing: 1px; position: absolute; top: 0px; color: #42AFE3; font-size: 2em;">Results</h4>
+		<br>
+	</div>
+	<div class="form-group col-md-2">
+		<a ng-href="#/CCPS">
+			<button class="btn btn-primary customSmallButton"
+				style="background: #42AFE3; margin-top: 10px; float: right">Back</button>
+		</a>
+	</div>
+	<div class="form-group col-md-12"
+		style="height: 40px; padding-top: 1px; padding-left: 8.5em;">
+		<label style="color: #42AFE3";>Request ID: <input type="text"
+			style="color: black;" class="commandTitle tableOverflow"
+			ng-disabled="disable" ng-model="requestId" title="{{requestId}}">
+			Request Name: <input type="text" style="color: black;"
+			class="commandTitle tableOverflow" ng-disabled="disable"
+			ng-model="requestName" title="{{requestName}}"> Request
+			Submitted On: <input type="text" style="color: black;"
+			class="commandTitle tableOverflow" ng-disabled="disable"
+			ng-model="requestSubmittedDate" title="{{requestSubmittedDate}}"></label>
+	</div>
+	<div class="form-group col-md-12"
+		style="width: 940px; padding-left: 8em;">
+		<div class="table-responsive" valign="top"
+			style="background: white; -moz-border-radius: 10px; -webkit-border-radius: 10px; border: solid 4px lightgray;">
+			<div class="specificparametersTable"
+				style="max-height: 7em; height: 15em; width: 100%; overflow: auto;">
+				<table class="table table-bordered"
+					style="width: 100%; padding-top: 5px;" arrow-Selector>
+					<tr style="padding-top: 1px;">
+						<th class="requestTitle"
+							style="background: #42AFE3; color: white; border: none; width: 6em; text-align: center"
+							align="center">#</th>
+						<th class="requestTitle"
+							style="background: #42AFE3; color: white; border: none; width: 8em; text-align: center"
+							align="center">Element Name</th>
+						<th class="requestTitle"
+							style="background: #42AFE3; color: white; border: none; width: 5em; text-align: center"
+							align="center">Conditional Traffic</th>
+						<th class="requestTitle"
+							style="background: #42AFE3; color: white; border: none; width: 5em; text-align: center"
+							align="center">Run Out Threshold</th>
+						<th class="requestTitle"
+							style="background: #42AFE3; color: white; border: none; width: 9em; text-align: center"
+							align="center">Run Out Date</th>
+					</tr>
+					<tr style="padding-top: 1px;" ng-repeat="runOut in runOutList"
+						ng-class="{'selected':$index == selectedRow}"
+						ng-click="setClickedRow($index,runOutList)">
+						<td class="requestTitle" style="text-align: center; width: 60px;">{{$index}}</td>
+						<td class="requestTitle" style="text-align: center; width: 60px;">{{runOut.nodeName}}</td>
+						<td class="requestTitle" style="text-align: center; width: 60px;">{{runOut.conditionalTraffic}}</td>
+						<td class="requestTitle" style="text-align: center; width: 60px;">{{runOut.threshold}}</td>
+						<td class="requestTitle" style="text-align: center; width: 60px;">{{runOut.runOutDate}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="form-group col-md-12"
+		style="width: 1100px; padding-left: .25em;">
+		<div class="table-responsive" valign="top"
+			style="background: white; -moz-border-radius: 10px; -webkit-border-radius: 10px; border: solid 4px lightgray;">
+			<div class="specificparametersTable"
+				style="max-height: 25em; height: 65em; width: 100%; overflow: auto;">
+				<table class="table table-bordered"
+					style="width: 100%; padding-top: 5px;"
+					ng-controller="NodeController">
+					<tr style="padding-top: 1px;">
+						<th class="requestTitle"
+							style="background: #42AFE3; color: white; border: none; width: 8em; text-align: center"
+							align="center">Chart View</th>
+						<th class="requestTitle"
+							style="background: #42AFE3; color: white; border: none; width: 8em; text-align: center"
+							align="center">Graph View</th>
+					</tr>
+					<tr>
+						<td style="width: 50%; padding-top: 5px;">
+							<canvas id="line" class="chart chart-line" chart-data="data"
+								chart-labels="labels" chart-series="series"
+								chart-options="options" chart-dataset-override="datasetOverride" chart-Colors="colours"
+								width="560" height="300">
+							</canvas>
+							</td>
+						<td style="width: 50%; padding-top: 5px;" my-nodes></td>
+					</tr>
+				</table>
+				</div>
+			</div>
+	</div>
+</div>
