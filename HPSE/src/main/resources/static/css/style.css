@@ -6,7 +6,7 @@ Primary style
 
 -------------------------------- */
 *, *::after, *::before {
-  box-sizing: border-box;
+  box-sizing: border-box;"src/main/resources/static/css/style.css"
 }
 
 html {
@@ -113,7 +113,7 @@ Header
   left: 0;
   height: 45px;
   width: 100%;
-  background: #3e454c;
+  background: #055858;
   
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   -webkit-font-smoothing: antialiased;
@@ -426,7 +426,7 @@ Sidebar
   top: 0;
   width: 100%;
   padding: 45px 0 0;
-  background-color: #2c3136;
+  background-color: #055858;
   visibility: hidden;
   opacity: 0;
   max-height: 100vh;
@@ -618,7 +618,7 @@ Sidebar
 }
 @media only screen and (min-width: 1170px) {
   .cd-side-nav {
-    width: 200px;
+    width: 250px;
   }
   .cd-side-nav > ul {
     padding: 0.6em 0;

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hpse.assessment.server.model.Requests;
 import com.hpse.assessment.server.service.RequestMappingService;
-import com.hpse.assessment.server.service.ShortestPathService;
 
 
 @Controller
@@ -26,9 +25,6 @@ public class HPSEController {
 	@Autowired
 	private RequestMappingService requestService;
 	
-	@Autowired
-	private ShortestPathService shortestPathService;
-
 	@RequestMapping("/")
     public String getIndexPage(){
     	System.out.println("hi");

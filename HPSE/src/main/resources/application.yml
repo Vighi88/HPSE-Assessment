@@ -4,7 +4,7 @@ spring:
     platform: local
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: false
+    show-sql: true
     hibernate:
       # turn off for now as well already have a schema but look into enabling later
       ddl-auto: none 

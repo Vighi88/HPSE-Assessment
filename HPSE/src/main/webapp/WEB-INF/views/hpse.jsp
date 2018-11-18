@@ -7,9 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <%-- <img href="<c:url value="/img/favicon.ico"/>" rel="icon"
 	type="image/x-icon" /> --%>
-<link
-	href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
-	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/OpenSans.css" />
 <link rel="stylesheet" href="css/ng-tags-input.bootstrap.min.css" />
 <link rel="stylesheet" href="css/ng-tags-input.min.css" />
 <link rel="stylesheet" href="css/reset.css" />
@@ -19,14 +17,14 @@
 <!-- Resource style -->
 
 <link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="css/jQuery-ui.css" />
 <!-- Bootstrap -->
 
 
 
 <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script	type="text/javascript" src="js/jquery-min.js"></script>
+<script type="text/javascript" src="js/jquery-min-ui.js"></script>
 <script type="text/javascript" src="js/jquery.menu-aim.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <!-- Resource jQuery -->
@@ -34,13 +32,9 @@
 <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="js/angular.min.js"></script>
 <script type="text/javascript" src="js/ng-tags-input.min.js"></script>
-<!-- <script src="http://mbenford.github.io/ngTagsInput/js/ng-tags-input.min.js"></script> -->
-<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.0.1/ng-tags-input.min.js"></script> -->
-<!-- <script type="text/javascript" src="js/ng-tags-input.min.js"></script> -->
 <!-- Angular -->
 <script type="text/javascript" src="js/angular-route.min.js"></script>
 <script type="text/javascript" src="js/angular-local-storage.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
 <script type="text/javascript" src="js/download.js"></script>
 <!-- for file download-->
 <script type="text/javascript" src="js/ngBootbox.js"></script>
@@ -50,9 +44,6 @@
 <!-- Modernizr -->
 <script type="text/javascript" src="./app.js"></script>
 <script type="text/javascript" src="modules/util/util.module.js"></script> <!-- Util -->
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script type="text/javascript"  src="js/Chart.js"></script>
-<script type="text/javascript" src="js/angular-chart.js"></script>
 <script type="text/javascript">
 	if (!String.prototype.startsWith) {
 		String.prototype.startsWith = function(searchString, position) {
@@ -68,13 +59,12 @@
 	 <div class="right"></div>
 	<div ng-controller="MainController">
 		<header class="cd-main-header">
-			<a><img class="cd-logo" src="img/infosys.png" alt="Logo"></a>
-			<p class="cd-wel" align="center" ng-show="true">Travelling SalesMan (Bellman-Held-Karp algorithm)</p>
+			<p class="cd-wel" align="center" ng-show="true">&nbsp;&nbsp;&nbsp;&nbsp;Travelling SalesMan (Bellman-Held-Karp algorithm)</p>
 		</header>
 		<main class="cd-main-content">
 		<nav class="cd-side-nav">
 			<ul>
-				<li class="cd-label"><a href="#/HPSE">Find Shortest Path</a></li>
+				<li class="cd-label"><a href="#/HPSE">Shortest Path</a></li>
 			</ul>
 			<ul>
 				<li class="cd-label"><a href="#/UserGuide">User Guide</a></li>

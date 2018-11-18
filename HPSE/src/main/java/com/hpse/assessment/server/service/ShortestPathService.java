@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ShortestPathService {
 
-	public int N;
-	public int START_NODE;
-	public int FINISHED_STATE;
+	public int noOfCities, originCity, EndStatus;
 
 	private double[][] distance;
 	private double minTourCost = Double.POSITIVE_INFINITY;
@@ -24,37 +22,33 @@ public class ShortestPathService {
 
 	public ShortestPathService(int startNode, double[][] distance) {
 		this.distance = distance;
-		N = distance.length;
-		START_NODE = startNode;
+		noOfCities = distance.length;
+		originCity = startNode;
 
 		// Validate inputs.
-		if (N <= 2)
-			throw new IllegalStateException("TSP on 0, 1 or 2 nodes doesn't make sense.");
-		if (N != distance[0].length)
-			throw new IllegalArgumentException("Matrix must be square (N x N)");
-		if (START_NODE < 0 || START_NODE >= N)
-			throw new IllegalArgumentException("Starting node must be: 0 <= startNode < N");
-		if (N > 32)
+		if (noOfCities <= 2)
+			throw new IllegalStateException("The minimum number of cities to calculate shortest path is 3");
+		if (noOfCities != distance[0].length)
+			throw new IllegalArgumentException("Mismatch in the input data and the number of cities count");
+		if (originCity < 0 || originCity >= noOfCities)
+			throw new IllegalArgumentException("Origin City should be lesser than number of cities ");
+		if (noOfCities > 32)
 			throw new IllegalArgumentException(
 					"Matrix too large! A matrix that size for the DP TSP problem with a time complexity of"
 							+ "O(n^2*2^n) requires way too much computation for any modern home computer to handle");
 
-		// The finished state is when the finished state mask has all bits are set to
-		// one (meaning all the nodes have been visited).
-		System.out.println("Statrt Finished STate");
-		FINISHED_STATE = (1 << N) - 1;
-		
-		System.out.println("Statrt Finished STate" + FINISHED_STATE);
+		// To identify whether all nodes have been visited.
+		EndStatus = (1 << noOfCities) - 1;
 	}
 
-	// Returns the optimal tour for the traveling salesman problem.
+	// It will return the OPTIMAL path for traveling cities.
 	public List<Integer> getTour() {
 		if (!ranSolver)
 			solve();
 		return tour;
 	}
 
-	// Returns the minimal tour cost.
+	// It will return the minimal cost of the path for traveling cities.
 	public double getTourCost() {
 		if (!ranSolver)
 			solve();
@@ -64,13 +58,13 @@ public class ShortestPathService {
 	public void solve() {
 
 		// Run the solver
-		int state = 1 << START_NODE;
-		Double[][] memo = new Double[N][1 << N];
-		Integer[][] prev = new Integer[N][1 << N];
-		minTourCost = tsp(START_NODE, state, memo, prev);
+		int state = 1 << originCity;
+		Double[][] memo = new Double[noOfCities][1 << noOfCities];
+		Integer[][] prev = new Integer[noOfCities][1 << noOfCities];
+		minTourCost = hpseAssessment(originCity, state, memo, prev);
 
 		// Regenerate path
-		int index = START_NODE;
+		int index = originCity;
 		while (true) {
 			tour.add(index);
 			Integer nextIndex = prev[index][state];
@@ -80,30 +74,30 @@ public class ShortestPathService {
 			state = nextState;
 			index = nextIndex;
 		}
-		tour.add(START_NODE);
+		tour.add(originCity);
 		ranSolver = true;
 	}
 
-	private double tsp(int i, int state, Double[][] memo, Integer[][] prev) {
+	private double hpseAssessment(int i, int state, Double[][] memo, Integer[][] prev) {
 
-		// Done this tour. Return cost of going back to start node.
-		if (state == FINISHED_STATE)
-			return distance[i][START_NODE];
+		// Return weightage of going back to start node.
+		if (state == EndStatus)
+			return distance[i][originCity];
 
-		// Return cached answer if already computed.
+		// Return the cached data if already computed.
 		if (memo[i][state] != null)
 			return memo[i][state];
 
 		double minCost = Double.POSITIVE_INFINITY;
 		int index = -1;
-		for (int next = 0; next < N; next++) {
+		for (int next = 0; next < noOfCities; next++) {
 
-			// Skip if the next node has already been visited.
+			// Skip if the next node since it has already been visited.
 			if ((state & (1 << next)) != 0)
 				continue;
 
 			int nextState = state | (1 << next);
-			double newCost = distance[i][next] + tsp(next, nextState, memo, prev);
+			double newCost = distance[i][next] + hpseAssessment(next, nextState, memo, prev);
 			if (newCost < minCost) {
 				minCost = newCost;
 				index = next;
@@ -118,22 +112,17 @@ public class ShortestPathService {
 
 		// Create adjacency matrix
 		int n = noOfCities;
-		ShortestPathService solver = null;
+		ShortestPathService pathResolver = null;
 		double[][] distanceMatrix = new double[n][n];
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				distanceMatrix[i][j] = distance[i][j];
 				// Run the solver
-				solver = new ShortestPathService(originCity, distanceMatrix);
+				pathResolver = new ShortestPathService(originCity, distanceMatrix);
 			}
 		}
-				// Prints: [0, 3, 2, 4, 1, 5, 0]
-				System.out.println("Tour: " + solver.getTour());
 
-				// Print: 42.0
-				System.out.println("Tour cost: " + solver.getTourCost());
-
-String shortestPath = "Shortest Travel Path: "+ solver.getTour() +" Shortest Travel Cost: " + solver.getTourCost();
+String shortestPath = "Shortest Travel Path: "+ pathResolver.getTour() +" Shortest Travel Cost: " + pathResolver.getTourCost();
 		return shortestPath;
 	}
 }

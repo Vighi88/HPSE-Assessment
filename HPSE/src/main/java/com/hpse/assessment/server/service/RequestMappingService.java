@@ -20,8 +20,6 @@ public class RequestMappingService {
 	public List<Requests> getRequestList()
 	{
 		List<Requests> objRequest = requestRepository.findAll();
-System.out.println("-------------------->");
-System.out.println(objRequest.get(0).getNoOfCities());
 		return objRequest;
 	}
 	
