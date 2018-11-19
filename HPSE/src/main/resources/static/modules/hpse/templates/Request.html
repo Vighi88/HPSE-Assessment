@@ -1,0 +1,114 @@
+<div ng-controller="assessmentController"	ng-init="populateRequestPage()"
+	style="font-size: 1.1em; font-family: agency;">
+		<div class="form-group col-md-12" style="width: 940px;">
+	<div class="form-group col-md-10">
+		<h4 align="left"
+			style="letter-spacing: 1px; position: absolute; top: 0px; color: #42AFE3; font-size: 2em;">Submit
+			Request</h4>
+		<br><br><br>
+	</div>
+	<div class="form-group col-md-6"
+		style="height: 40px; padding-top: 5px;">
+		<label style="width: 100%; font-size: 1em; height: 100%">Please enter the number of Cities
+			<span style="color: red; margin-right: 20px;">*</span><input
+			type="text"
+			style="width: 10%; -moz-border-radius: 3px; -webkit-border-radius: 3px; margin-right: 70px;"
+			class="requestTitle tableOverflow ng-pristine ng-valid ng-empty ng-touched"
+			ng-model="user.noOfCities"> 
+		</label>
+	</div>
+	<div class="form-group col-md-6"
+		style="height: 40px; padding-top: 5px;"><label
+			style="width: 100%; font-size: 1em; height: 100%">Please enter the Origin City number
+			<span style="color: red; margin-right: 20px;">*</span><input
+			type="text"
+			style="width: 10%; -moz-border-radius: 3px; -webkit-border-radius: 3px; margin-right: 70px;"
+			class="requestTitle tableOverflow ng-pristine ng-valid ng-empty ng-touched"
+			ng-model="user.originCity">
+		</label></div>
+	<div class="col-md-12" style="text-align: center"> <a ng-click="createMatrix()"><button class="btn btn-primary customSmallButton"
+					style="background: #42AFE3; width: 135px !important; margin-top: 0em; margin-bottom: 7px;">Click to enter Weightage</button></a></div>
+	</div>
+	<div class="form-group col-md-12" style="width: 940px;">
+		<!-- <div class="form-group col-md-12"> -->
+		<h4 style="color: #42AFE3; font-size: 1.5em;" ng-hide="captureInput">Please enter the weightage for the paths</h4>
+		<div class="table-responsive" valign="top"
+			style="background: white; -moz-border-radius: 10px; -webkit-border-radius: 10px; border: solid 4px lightgray;" ng-hide="captureInput">
+		<div class="specificparametersTable"
+				style="max-height: 7em; height: 15em; width: 100%; overflow: auto;">
+				<table class="specificparametersTable" style="width: 100%;"
+					id="parametersContainer">
+					<tr style="padding-top: 1px;" ng-repeat="row in user.matrix" ng-init="outerIndex=$index">
+						<td class="requestTitle ng-pristine ng-valid ng-empty ng-touched"
+							style="width: 60px;" ng-repeat="col in row track by $index" ng-init="innerIndex=$index">
+							<span data-ng-hide="editMode">{{user.matrix[$parent.$index][$index]}}</span>
+							<input type ="text" data-ng-show="editMode" data-ng-model="user.matrix[$parent.$index][$index]"> 
+							</input>
+						</td>
+						<td class="requestTitle ng-pristine ng-valid ng-empty ng-touched"
+							style="width: 60px;">
+							<button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editAppKey(row,row[outerIndex])" class="btn btn-xs btn-primary">Edit</button>
+							<button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; saveField(outerIndex,$index)" class="btn btn-xs btn-success">Save</button>
+							<button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; cancel()" class="btn btn-default">Cancel</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-12" style="text-align: center; padding-top: 1em;" ng-hide="captureInput">
+			<a ng-click="findShortestPath()">
+				<button class="btn btn-primary customSmallButton"
+					style="background: #42AFE3; width: 125px !important; margin-top: 0em; margin-bottom: 7px;"> Find Shortest Path
+				</button>
+			</a>
+		</div>
+		<br>
+		<div class="form-group col-md-12"
+			style="width: 940px; padding-left: .25em;">
+			<div class="form-group col-md-10" style="padding-left: .25em;">
+				<h4 align="left"
+					style="letter-spacing: 1px; position: absolute; top: 0px; color: #42AFE3; font-size: 2em;">Submitted
+					Request</h4>
+				<br>
+			</div>
+			<br> <br> <br>
+			<div class="form-group col-md-12"
+				style="width: 940px; padding-left: .25em;">
+				<div class="table-responsive" valign="top"
+					style="background: white; -moz-border-radius: 10px; -webkit-border-radius: 10px; border: solid 4px lightgray;">
+					<div class="specificparametersTable"
+						style="max-height: 7em; height: 15em; width: 100%; overflow: auto;">
+						<table class="specificparametersTable"
+							style="width: 100%; padding-top: 5px;">
+							<tr style="padding-top: 1px;">
+								<td class="requestTitle"
+									style="background: #42AFE3; color: white; border: none; width: 6em; text-align: center"
+									align="center">Request #</td>
+								<td class="requestTitle"
+									style="background: #42AFE3; color: white; border: none; width: 8em; text-align: center"
+									align="center">City Count</td>
+								<td class="requestTitle"
+									style="background: #42AFE3; color: white; border: none; width: 9em; text-align: center"
+									align="center">Tour Path and Cost</td>
+								<td class="requestTitle"
+									style="background: #42AFE3; color: white; border: none; width: 9em; text-align: center"
+									align="center">Date of Request</td>
+							</tr>
+							<tr style="padding-top: 1px;" ng-repeat="requests in usersList">
+								<td class="requestTitle"
+									style="text-align: center; width: 60px;"><a
+									data-ng-click="showRequestData(requests)"
+									href=""> {{requests.requestDetailsId}} </a></td>
+								<td class="requestTitle"
+									style="text-align: center; width: 60px;">{{requests.noOfCities}}</td>
+									<td class="requestTitle"
+									style="text-align: center; width: 60px;">{{requests.shortestPath}}</td>
+								<td class="requestTitle" style="text-align: center; width: 60px;">{{requests.requestSubmissionDate}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

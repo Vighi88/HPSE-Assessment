@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    platform: local
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      # turn off for now as well already have a schema but look into enabling later
+      ddl-auto: none 
+
+# local AU testing
+#lookingglass.cgi.url: http://hldev-core1-syd3.internal/cgi-bin/jacct/traceroute.cgi
+
+# for simulating errors - set one OR the other!
+throw.internal.exception: false
+throw.businessRule.exception: false
+
+logging.level.org.springframework.web: DEBUG
+logging.level.com.telstra: DEBUG
+   
+h2:
+  console:
+    endpoint: h2
