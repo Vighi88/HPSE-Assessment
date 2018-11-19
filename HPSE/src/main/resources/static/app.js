@@ -4,6 +4,30 @@
 
 			.controller('MainController', function($scope, $window) {
 				console.log("Im in Main Controller");
+				$scope.populateGuide = function()
+				{
+					$scope.hide1 = false;
+					$scope.hide2 = true;
+					$scope.hide3 = true;
+				}
+				$scope.navigateToFill = function()
+				{
+					$scope.hide1 = true;
+					$scope.hide2 = false;
+					$scope.hide3 = true;
+				}
+				$scope.navigateToResult = function()
+				{
+					$scope.hide1 = true;
+					$scope.hide2 = true;
+					$scope.hide3 = false;
+				}
+				$scope.navigateToSummary = function()
+				{
+					$scope.hide1 = false;
+					$scope.hide2 = true;
+					$scope.hide3 = true;
+				}
 				/* $window.location.href = '#/Node'; */
 			})
 			/* CCPSRequest Controller */
@@ -110,8 +134,8 @@
 				$routeProvider.when('/HPSE', {
 					templateUrl : 'modules/hpse/templates/Request.html',
 					controller : 'assessmentController'
-				}).when('/Maintenance', {
-					templateUrl : 'modules/hpse/templates/Maintenance.html',
+				}).when('/UserGuide', {
+					templateUrl : 'modules/hpse/templates/UserGuide.html',
 					controller : 'MainController'
 				})
 				.when('', {});
