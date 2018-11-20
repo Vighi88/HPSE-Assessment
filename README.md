@@ -3,7 +3,7 @@
 ############Step By Step Guide###############
 
 #pull images from GIT
-git pull https://github.com/Vighi88/HPSE-Assessment.git
+git clone https://github.com/Vighi88/HPSE-Assessment.git
 
 #Build war
 mvn clean install  [This is to be executed from where the pom.xml is located after pulling the files] 
