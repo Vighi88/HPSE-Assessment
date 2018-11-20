@@ -26,6 +26,8 @@ docker build -t imageName:v1 .
 
 
 ##################E2E Automation Guide##########
+
+
 Step-1 : Download the file Vignesh_HPSE.properties and hpse_cicd.sh files to your root folder.
 
 Step-2 : run the command "sh hpse_cicd.sh" 
