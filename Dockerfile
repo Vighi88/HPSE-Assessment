@@ -5,4 +5,4 @@ From tomcat:8-jre8
 COPY HPSE-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/HPSE.war
 
 #Permission for war file 
-RUN CHMOD 777 /usr/local/tomcat/webapps/HPSE.war
+RUN chmod 777 /usr/local/tomcat/webapps/HPSE.war
