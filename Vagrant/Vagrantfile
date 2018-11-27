@@ -29,7 +29,6 @@ Vagrant.configure(2) do |config|
         cfg.vm.provider :virtualbox do |v|
             v.name = "haproxy"
         cfg.vm.provision :shell, :path => "haproxy.sh"
-        cfg.vm.provision "file", source: "/root/VigneshHPSE/haproxy.cfg", destination: "/etc/haproxy/haproxy.cfg"
         cfg.vm.provision :shell, :path => "haproxystart.sh"
         end
     end
