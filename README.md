@@ -38,3 +38,24 @@ You can see the Page loaded.
 
 Step-4 : Click on ShortestPath to provide input to identify shortest Path or Click User Guide menu to see the guide
 
+
+##################End of E2E Automation Guide##########
+
+
+##################One Click Spin Up##########
+
+Pre Requsite : 
+
+Assumption is that you have the GIT installed already to clone
+
+Brought down / destroy the running VM's if any 
+
+Step-1 : Download the OneClickSpinUp.sh to your root directory
+
+Step-2 : execute the command sh OneClickSpinUp.sh 
+
+Step-3 : Access the application with your http://hostIpAddress:9898/HPSE
+
+##################End of One Click Spin Up##########
+
+
