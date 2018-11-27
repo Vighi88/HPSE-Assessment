@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hpse.assessment.server.model.Requests;
+import com.hpse.assessment.server.model.SequenceId;
 import com.hpse.assessment.server.repository.RequestRepository;
+import com.hpse.assessment.server.repository.SequenceRepository;
 
 @Service
 public class RequestMappingService {
@@ -17,6 +19,8 @@ public class RequestMappingService {
 	@Autowired
 	private ShortestPathService shortestPathService;
 	
+	@Autowired
+	private SequenceRepository sequenceRepository;
 	public List<Requests> getRequestList()
 	{
 		List<Requests> objRequest = requestRepository.findAll();
@@ -35,6 +39,23 @@ public class RequestMappingService {
 		objRequest.setNoOfCities(objInputRequest.getNoOfCities());
 		return requestRepository.save(objRequest);
 	}
-
+	public SequenceId findandupdate(String Id)
+	{
+		SequenceId sequenceid = sequenceRepository.findById(Id);
+		if(null==sequenceid || null==sequenceid.getSeq())
+		{
+			sequenceid = new SequenceId();
+			sequenceid.setSeq(1001l);
+			System.out.println("SequenceID"+sequenceid.getSeq());
+		}
+		else
+		{
+		System.out.println("SequenceID"+sequenceid.getSeq());
+		sequenceid = sequenceRepository.findById(Id);
+		sequenceid.setSeq(sequenceid.getSeq()+1);
+		System.out.println("SequenceID+1"+sequenceid.getSeq());
+		}
+		return sequenceRepository.save(sequenceid);
+	}
 
 }

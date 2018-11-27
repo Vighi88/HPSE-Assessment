@@ -1,22 +1,11 @@
 package com.hpse.assessment.server.model;
 
 import java.io.Serializable;
-import java.sql.Array;
-import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import org.hibernate.annotations.GenericGenerator;
-
-@Entity
-@Table(name = "REQUEST_DETAILS")
+@Document(collection = "Request_Details")
 public class Requests implements Serializable {
 	
 /*	public List<MatrixInput> getMatrixInput() {
@@ -28,30 +17,17 @@ public class Requests implements Serializable {
 	}*/
 
 	@Id
-	@GenericGenerator(name="SequenceFetcher", strategy="com.hpse.assessment.server.model.SequenceFetcher")
-	@GeneratedValue(generator="SequenceFetcher")
-	@Column(name = "REQUESTDETAILSID")
 	private String 	requestDetailsId;
 
-	@Column(name = "REQUESTDETAILSDATE")
-	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy")
 	private String requestSubmissionDate;
 	
-	@Column(name = "NUMBEROFCITIES")
 	private Long  noOfCities;
 	
-	@Column(name = "ORIGINCITY")
 	private Long  originCity;
 	
-	@Column(name = "MATRIX")
 	private double[][] matrix;
 	
-	@Column(name = "SHORTESTPATH")
 	private String shortestPath;
-/*	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="REQUESTDETAILSID", referencedColumnName="REQUESTDETAILSID")
-	@Column(name = "MatrixInput")
-	private List<MatrixInput> matrixInput;*/
 	
 	public String getRequestSubmissionDate() {
 		return requestSubmissionDate;
