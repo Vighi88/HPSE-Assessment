@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hpse.assessment.server.model.Requests;
+import com.hpse.assessment.server.model.SequenceId;
 import com.hpse.assessment.server.service.RequestMappingService;
 
 
@@ -50,6 +51,8 @@ public class HPSEController {
 	public @ResponseBody Requests saveRequestDetails(
 			@RequestBody Requests requestConditions) {
 		Requests objRequest = new Requests();
+		SequenceId sequence =requestService.findandupdate("hosting");
+		requestConditions.setRequestDetailsId("REQ"+sequence.getSeq());
 		objRequest = requestService.saveRequests(requestConditions);
 		LOGGER.debug("RequestNumber "+objRequest.getRequestDetailsId());
 		return objRequest;
