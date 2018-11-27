@@ -4,21 +4,6 @@ git_url=https://github.com/Vighi88/HPSE-Assessment.git
 clone_path=/root/VigneshHPSE
 sourcefile_path=/root/VigneshHPSE/HPSE-Assessment/Vagrant
 
-
-echo "Bringing down all the existing running Vagrant services of VR"
-
-vagrant destroy database -f 
-
-sleep 2
-
-vagrant destroy appvm -f 
-
-sleep 2
-
-vagrant destroy haproxy -f 
-
-sleep 2
-
 #Ensure to clear the existing files from the Clone Path
 echo "Clear the existing files from the VigneshHPSE"
 sleep 2
