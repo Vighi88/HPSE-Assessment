@@ -65,9 +65,22 @@ sleep 5
 
 cp *.conf $mongod_path
 
+echo "Creating data/db folder"
+
+sudo mkdir -p /data/db
+
 echo  "downloaded the mongod config file inside etc folder"
 
-service mongod start
-chkconfig mongod on
+cd /bin
+
+sudo nohup mongod &
+
 clear
+
 echo 'MongoDB is installed, running and set to auto-start on reboots'
+
+sleep 50
+
+echo "Adding users"
+
+sudo mongo TAAS /root/HPSE/HPSE-Assessment/Vagrant/mongouser.js
