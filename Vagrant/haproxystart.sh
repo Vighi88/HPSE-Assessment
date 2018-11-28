@@ -66,4 +66,8 @@ service haproxy status
 
 echo "Started"
 
+echo "Selinux disabled"
+
+sudo setenforce 0
+
 exit
